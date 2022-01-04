@@ -1,2 +1,3 @@
 rootProject.name = "Polyphon"
 include ':app'
+include ':audiokit'
