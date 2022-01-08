@@ -2,7 +2,7 @@
 #include <string>
 
 extern "C" JNIEXPORT jstring JNICALL
-Java_tech_moonboots_audiokit_AudioKit_stringFromJNI(
+Java_tech_moonboots_audiokit_AudioKit_helloFromCplusplusString(
         JNIEnv* env,
         jobject /* this */) {
     std::string hello = "Hello from C++";
