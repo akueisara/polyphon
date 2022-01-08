@@ -1,3 +1,3 @@
 rootProject.name = "Polyphon"
-include ':samples:app'
+include ':samples:DynamicOscillator'
 include ':audiokit'

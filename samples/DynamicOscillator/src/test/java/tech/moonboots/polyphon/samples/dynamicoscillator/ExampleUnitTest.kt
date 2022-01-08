@@ -1,4 +1,4 @@
-package tech.moonboots.polyphon
+package tech.moonboots.polyphon.samples.dynamicoscillator
 
 import org.junit.Test
 

@@ -1,9 +1,9 @@
-package tech.moonboots.polyphon
+package tech.moonboots.polyphon.samples.dynamicoscillator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import tech.moonboots.audiokit.AudioKit
-import tech.moonboots.polyphon.databinding.ActivityMainBinding
+import tech.moonboots.polyphon.samples.dynamicoscillator.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

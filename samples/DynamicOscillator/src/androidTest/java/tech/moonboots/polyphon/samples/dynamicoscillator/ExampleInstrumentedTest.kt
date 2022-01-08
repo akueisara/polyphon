@@ -1,4 +1,4 @@
-package tech.moonboots.polyphon
+package tech.moonboots.polyphon.samples.dynamicoscillator
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
