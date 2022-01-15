@@ -3,13 +3,10 @@
 
 void AudioEngine::start() {
     oboe::AudioStreamBuilder builder;
-
     builder.setCallback(this);
     builder.setPerformanceMode(oboe::PerformanceMode::LowLatency);
     builder.setSharingMode(oboe::SharingMode::Exclusive);
-
-    oboe::AudioStream *stream = nullptr;
-    oboe::Result result = builder.openStream(&stream);
+    oboe::Result result = builder.openStream(stream);
 
     if (result != oboe::Result::OK) {
         LOGE("Error opening stream: %s", oboe::convertToText(result));
@@ -30,13 +27,22 @@ void AudioEngine::start() {
     }
 }
 
+oboe::Result AudioEngine::stop() {
+    oboe::Result result = oboe::Result::OK;
+    if (stream) {
+        result = stream->stop();
+        stream->close();
+        stream.reset();
+    }
+    return result;
+}
+
+void AudioEngine::setToneOn(bool isOn) {
+    oscillator.setWaveOn(isOn);
+}
+
 oboe::DataCallbackResult AudioEngine::onAudioReady(
         oboe::AudioStream *oboeStream, void *audioData, int32_t numFrames) {
     oscillator.render(static_cast<float *>(audioData), numFrames);
     return oboe::DataCallbackResult::Continue;
-}
-
-
-void AudioEngine::setToneOn(bool isOn) {
-    oscillator.setWaveOn(isOn);
 }

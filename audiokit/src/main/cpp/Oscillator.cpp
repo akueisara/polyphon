@@ -2,7 +2,7 @@
 #include <math.h>
 
 #define TWO_PI (3.14159 * 2)
-#define AMPLITUDE 0.3
+#define AMPLITUDE 0.1
 #define FREQUENCY 440.0
 
 void Oscillator::setSampleRate(int32_t sampleRate) {
