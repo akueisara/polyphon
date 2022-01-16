@@ -1,11 +1,12 @@
 #include <atomic>
 #include <stdint.h>
+#include "IRenderableAudio.h"
 
-class Oscillator {
+class Oscillator: public IRenderableAudio {
 public:
     void setWaveOn(bool isWaveOn);
     void setSampleRate(int32_t sampleRate);
-    void render(float *audioData, int32_t numFrames);
+    void renderAudio(float *audioData, int32_t numFrames) override;
 
 private:
     std::atomic<bool> isWaveOn_{false};

@@ -13,7 +13,7 @@ void Oscillator::setWaveOn(bool isWaveOn) {
     isWaveOn_.store(isWaveOn);
 }
 
-void Oscillator::render(float *audioData, int32_t numFrames) {
+void Oscillator::renderAudio(float *audioData, int32_t numFrames) {
     if (!isWaveOn_.load()) phase_ = 0;
 
     for (int i = 0; i < numFrames; i++) {

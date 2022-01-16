@@ -21,7 +21,7 @@ extern "C" {
     }
 
     JNIEXPORT void JNICALL
-    Java_tech_moonboots_audiokit_AudioEngine_setToneOn(
+    Java_tech_moonboots_audiokit_Oscillator_setToneOn(
             JNIEnv *env,
             jobject /*unused*/,
             jboolean is_on) {

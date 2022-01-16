@@ -43,6 +43,6 @@ void AudioEngine::setToneOn(bool isOn) {
 
 oboe::DataCallbackResult AudioEngine::onAudioReady(
         oboe::AudioStream *oboeStream, void *audioData, int32_t numFrames) {
-    oscillator.render(static_cast<float *>(audioData), numFrames);
+    oscillator.renderAudio(static_cast<float *>(audioData), numFrames);
     return oboe::DataCallbackResult::Continue;
 }
