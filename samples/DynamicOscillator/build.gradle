@@ -7,7 +7,7 @@ android {
     compileSdkVersion 32
 
     defaultConfig {
-        applicationId "tech.moonboots.polyphon.samples.dynamicoscillator"
+        applicationId "io.github.akueisara.polyphon.samples.dynamicoscillator"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 1
