@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.github.akueisara.audiokit.AudioEngine
-import io.github.akueisara.audiokit.Oscillator
+import io.github.akueisara.polyphon.AudioEngine
+import io.github.akueisara.polyphon.Oscillator
 import io.github.akueisara.polyphon.samples.dynamicoscillator.ui.theme.DynamicOscillatorComposeTheme
 
 class MainActivity : ComponentActivity() {

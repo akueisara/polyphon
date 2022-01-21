@@ -1,8 +1,8 @@
-package io.github.akueisara.audiokit
+package io.github.akueisara.polyphon
 
 class Oscillator: RenderableAudio {
     init {
-        System.loadLibrary("audiokit")
+        System.loadLibrary("polyphon")
     }
 
     external override fun setToneOn(isOn: Boolean)

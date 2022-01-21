@@ -1,4 +1,4 @@
-package io.github.akueisara.audiokit
+package io.github.akueisara.polyphon
 
 interface RenderableAudio {
     fun setToneOn(isOn: Boolean)

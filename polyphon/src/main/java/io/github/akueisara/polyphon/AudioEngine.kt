@@ -1,11 +1,11 @@
-package io.github.akueisara.audiokit
+package io.github.akueisara.polyphon
 
 object AudioEngine {
 
     var output: RenderableAudio? = null
 
     init {
-        System.loadLibrary("audiokit")
+        System.loadLibrary("polyphon")
     }
 
     fun start() {

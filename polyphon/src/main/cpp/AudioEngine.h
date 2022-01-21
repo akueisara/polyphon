@@ -1,5 +1,5 @@
-#ifndef AUDIOKIT_AUDIOENGINE_H
-#define AUDIOKIT_AUDIOENGINE_H
+#ifndef POLYPHON_AUDIOENGINE_H
+#define POLYPHON_AUDIOENGINE_H
 
 #include <oboe/Oboe.h>
 #include <logging.h>
@@ -20,4 +20,4 @@ private:
     Oscillator oscillator;
 };
 
-#endif //AUDIOKIT_AUDIOENGINE_H
+#endif //POLYPHON_AUDIOENGINE_H

@@ -7,21 +7,21 @@ static AudioEngine audioEngine;
 
 extern "C" {
    JNIEXPORT void JNICALL
-   Java_io_github_akueisara_audiokit_AudioEngine_startEngine(
+   Java_io_github_akueisara_polyphon_AudioEngine_startEngine(
             JNIEnv *env,
             jobject /*unused*/) {
         audioEngine.start();
     }
 
     JNIEXPORT void JNICALL
-    Java_io_github_akueisara_audiokit_AudioEngine_stopEngine(
+    Java_io_github_akueisara_polyphon_AudioEngine_stopEngine(
             JNIEnv *env,
             jobject /*unused*/) {
         audioEngine.stop();
     }
 
     JNIEXPORT void JNICALL
-    Java_io_github_akueisara_audiokit_Oscillator_setToneOn(
+    Java_io_github_akueisara_polyphon_Oscillator_setToneOn(
             JNIEnv *env,
             jobject /*unused*/,
             jboolean is_on) {
