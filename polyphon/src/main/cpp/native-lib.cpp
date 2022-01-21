@@ -6,8 +6,8 @@
 static AudioEngine audioEngine;
 
 extern "C" {
-   JNIEXPORT void JNICALL
-   Java_io_github_akueisara_polyphon_AudioEngine_startEngine(
+    JNIEXPORT void JNICALL
+    Java_io_github_akueisara_polyphon_AudioEngine_startEngine(
             JNIEnv *env,
             jobject /*unused*/) {
         audioEngine.start();
@@ -26,5 +26,29 @@ extern "C" {
             jobject /*unused*/,
             jboolean is_on) {
         audioEngine.setToneOn(is_on);
+    }
+
+    JNIEXPORT void JNICALL
+    Java_io_github_akueisara_polyphon_Oscillator_setSampleRate(
+            JNIEnv *env,
+            jobject thiz,
+            jint sample_rate) {
+        audioEngine.oscillator.setSampleRate(sample_rate);
+    }
+
+    JNIEXPORT void JNICALL
+    Java_io_github_akueisara_polyphon_Oscillator_setFrequency(
+            JNIEnv *env,
+            jobject thiz,
+            jdouble frequency) {
+        audioEngine.oscillator.setFrequency(frequency);
+    }
+
+    JNIEXPORT void JNICALL
+    Java_io_github_akueisara_polyphon_Oscillator_setAmplitude(
+            JNIEnv *env,
+            jobject thiz,
+            jfloat amplitude) {
+        audioEngine.oscillator.setAmplitude(amplitude);
     }
 }

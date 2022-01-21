@@ -8,6 +8,8 @@
 
 class AudioEngine: public oboe::AudioStreamCallback {
 public:
+    Oscillator oscillator;
+
     void start();
     oboe::Result stop();
     void setToneOn(bool isOn);
@@ -17,7 +19,6 @@ public:
 
 private:
     std::shared_ptr<oboe::AudioStream> stream;
-    Oscillator oscillator;
 };
 
 #endif //POLYPHON_AUDIOENGINE_H

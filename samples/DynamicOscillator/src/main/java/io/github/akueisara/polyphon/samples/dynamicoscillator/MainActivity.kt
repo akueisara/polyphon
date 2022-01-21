@@ -37,6 +37,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun DynamicOscillatorApp() {
     var isStart by remember { mutableStateOf(false) }
+    var frequency by remember { mutableStateOf(440f) }
+    var amplitude by remember { mutableStateOf(0.1f) }
 
     DynamicOscillatorComposeTheme {
         Scaffold(
@@ -50,23 +52,74 @@ private fun DynamicOscillatorApp() {
             }
         ) {
             Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
             ) {
+
                 Text(
-                    text = if (isStart) "Stop" else "Start",
                     modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
                         .padding(16.dp)
                         .clickable {
                             isStart = !isStart
                             AudioEngine.output?.setToneOn(isStart)
                         },
+                    text = if (isStart) "Stop" else "Start",
                     style = MaterialTheme.typography.h6,
                     textAlign = TextAlign.Center,
                 )
+
+                ParameterSlider(
+                    text = "Frequency",
+                    parameter = frequency,
+                    valueRange = 220f..880f,
+                    onParameterChange = {
+                        frequency = it
+                        AudioEngine.output?.setFrequency(frequency = it.toDouble())
+                    }
+                )
+
+                ParameterSlider(
+                    text = "Amplitude",
+                    parameter = amplitude,
+                    valueRange = 0.0f..1.0f,
+                    onParameterChange = {
+                        amplitude = it
+                        AudioEngine.output?.setAmplitude(amplitude = it)
+                    }
+                )
+
             }
         }
     }
+}
+
+@Composable
+private fun ParameterSlider(
+    text: String,
+    parameter: Float,
+    valueRange: ClosedFloatingPointRange<Float>,
+    onParameterChange: (Float) -> Unit
+) {
+    Row(horizontalArrangement = Arrangement.SpaceBetween) {
+        Text(
+            modifier = Modifier.padding(start = 8.dp),
+            text = text
+        )
+        Box(modifier = Modifier.weight(1f))
+        Text(
+            text= "%.2f".format(parameter),
+        )
+    }
+
+    Slider(
+        value = parameter,
+        valueRange = valueRange,
+        onValueChange = {
+            onParameterChange(it)
+        }
+    )
 }
 
 @Preview(showBackground = true)
