@@ -3,10 +3,11 @@
 
 #include <oboe/Oboe.h>
 #include <logging.h>
+#include "memory.h"
 #include "Oscillator.h"
 
 
-class AudioEngine: public oboe::AudioStreamCallback {
+class AudioEngine : public oboe::AudioStreamCallback {
 public:
     Oscillator oscillator;
 
@@ -18,7 +19,7 @@ public:
     onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_t numFrames);
 
 private:
-    std::shared_ptr<oboe::AudioStream> stream;
+    std::shared_ptr<oboe::AudioStream> mStream;
 };
 
 #endif //POLYPHON_AUDIOENGINE_H

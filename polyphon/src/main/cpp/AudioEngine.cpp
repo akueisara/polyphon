@@ -1,38 +1,38 @@
 #include "AudioEngine.h"
-#include "memory.h"
 
 void AudioEngine::start() {
     oboe::AudioStreamBuilder builder;
-    builder.setCallback(this);
-    builder.setPerformanceMode(oboe::PerformanceMode::LowLatency);
-    builder.setSharingMode(oboe::SharingMode::Exclusive);
-    oboe::Result result = builder.openStream(stream);
+    oboe::Result result = builder.setDataCallback(this)
+            ->setPerformanceMode(oboe::PerformanceMode::LowLatency)
+            ->setSharingMode(oboe::SharingMode::Exclusive)
+            ->setChannelCount(1)
+            ->openStream(mStream);
 
     if (result != oboe::Result::OK) {
         LOGE("Error opening stream: %s", oboe::convertToText(result));
         // Handle error
     }
 
-    auto setBufferSizeResult = stream->setBufferSizeInFrames(stream->getFramesPerBurst() * 2);
-    if (setBufferSizeResult) {
-        LOGI("New buffer size is %d frames", setBufferSizeResult.value());
-    }
+    oscillator.setSampleRate(mStream->getSampleRate());
 
-    oscillator.setSampleRate(stream->getSampleRate());
+    LOGD("Stream opened: AudioAPI = %d, channelCount = %d, deviceID = %d",
+         mStream->getAudioApi(),
+         mStream->getChannelCount(),
+         mStream->getDeviceId());
 
-    result = stream->requestStart();
+    result = mStream->start();
     if (result != oboe::Result::OK) {
         LOGE("Error starting playback stream. Error: %s", oboe::convertToText(result));
-        stream->close();
+        mStream->close();
     }
 }
 
 oboe::Result AudioEngine::stop() {
     oboe::Result result = oboe::Result::OK;
-    if (stream) {
-        result = stream->stop();
-        stream->close();
-        stream.reset();
+    if (mStream) {
+        result = mStream->stop();
+        mStream->close();
+        mStream.reset();
     }
     return result;
 }

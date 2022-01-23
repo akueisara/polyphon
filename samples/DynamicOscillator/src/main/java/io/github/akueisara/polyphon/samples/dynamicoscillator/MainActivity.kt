@@ -70,6 +70,44 @@ private fun DynamicOscillatorApp() {
                     textAlign = TextAlign.Center,
                 )
 
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .clickable {
+                                AudioEngine.output?.setSignalType(Oscillator.SignalType.SINE)
+                            }
+                            .padding(16.dp),
+                        text = "Sine",
+                    )
+                    Text(
+                        modifier = Modifier
+                            .clickable {
+                                AudioEngine.output?.setSignalType(Oscillator.SignalType.SQUARE)
+                            }
+                            .padding(16.dp),
+                        text = "Square"
+                    )
+                    Text(
+                        modifier = Modifier
+                            .clickable {
+                                AudioEngine.output?.setSignalType(Oscillator.SignalType.TRIANGLE)
+                            }
+                            .padding(16.dp),
+                        text = "Triangle"
+                    )
+                    Text(
+                        modifier = Modifier
+                            .clickable {
+                                AudioEngine.output?.setSignalType(Oscillator.SignalType.SAWTOOTH)
+                            }
+                            .padding(16.dp),
+                        text = "Sawtooth"
+                    )
+                }
+
                 ParameterSlider(
                     text = "Frequency",
                     parameter = frequency,
@@ -109,7 +147,7 @@ private fun ParameterSlider(
         )
         Box(modifier = Modifier.weight(1f))
         Text(
-            text= "%.2f".format(parameter),
+            text = "%.2f".format(parameter),
         )
     }
 
