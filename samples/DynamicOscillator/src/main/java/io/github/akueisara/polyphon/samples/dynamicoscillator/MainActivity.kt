@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 private fun DynamicOscillatorApp() {
     var isStart by remember { mutableStateOf(false) }
     var frequency by remember { mutableStateOf(440f) }
-    var amplitude by remember { mutableStateOf(0.1f) }
+    var amplitude by remember { mutableStateOf(0.2f) }
 
     DynamicOscillatorComposeTheme {
         Scaffold(

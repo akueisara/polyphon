@@ -37,14 +37,20 @@ public:
 private:
     std::atomic<bool> mIsWaveOn{false};
     float mPhase = 0.0;
+    float mPhaseIncrement = 0.0f;
     std::atomic<float> mAmplitude{0.1};
     SignalType mSignalType = SignalType::Sine;
-    std::atomic<double> mPhaseIncrement{0.0};
     double mFrequency = kDefaultFrequency;
     int32_t mSampleRate = kDefaultSampleRate;
 
     void updatePhaseIncrement() {
-        mPhaseIncrement.store((kTwoPi * mFrequency) / static_cast<double>(mSampleRate));
+       mPhase += mFrequency * mPhaseIncrement;
+       // Wrap phase in the range of -1 to +1
+       if (mPhase >= 1.0f) {
+           mPhase -= 2.0f;
+       } else if (mPhase < -1.0f) {
+           mPhase += 2.0f;
+       }
     };
 };
 

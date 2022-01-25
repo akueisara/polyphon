@@ -6,12 +6,11 @@ void Oscillator::setWaveOn(bool isWaveOn) {
 
 void Oscillator::setSampleRate(int32_t sampleRate) {
     mSampleRate = sampleRate;
-    updatePhaseIncrement();
+    mPhaseIncrement = 2.0f / sampleRate; // -1 to +1 is a range of 2
 }
 
 void Oscillator::setFrequency(double frequency) {
     mFrequency = frequency;
-    updatePhaseIncrement();
 }
 
 void Oscillator::setAmplitude(float amplitude) {
@@ -25,14 +24,14 @@ void Oscillator::setSignalType(int signalType) {
 void Oscillator::renderAudio(float *audioData, int32_t numFrames) {
     if (mIsWaveOn) {
         for (int i = 0; i < numFrames; ++i) {
-            // TODO: Validate the audio data for different types of signals
+            updatePhaseIncrement();
             switch (mSignalType) {
                 case SignalType::Sine: {
-                    audioData[i] = sinf(mPhase) * mAmplitude;
+                    audioData[i] = sinf(mPhase * kPi) * mAmplitude;
                     break;
                 }
                 case SignalType::Square: {
-                    if (mPhase <= kPi) {
+                    if (mPhase <= 0.0f) {
                         audioData[i] = -mAmplitude;
                     } else {
                         audioData[i] = mAmplitude;
@@ -51,8 +50,6 @@ void Oscillator::renderAudio(float *audioData, int32_t numFrames) {
                 default:
                     break;
             }
-            mPhase += mPhaseIncrement;
-            if (mPhase > kTwoPi) mPhase -= kTwoPi;
         }
     } else {
         memset(audioData, 0, sizeof(float) * numFrames);
