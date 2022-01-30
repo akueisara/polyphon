@@ -17,7 +17,7 @@ class Oscillator : RenderableAudio {
     }
 
     external override fun setToneOn(isOn: Boolean)
-    external override fun setFrequency(frequency: Double)
-    external override fun setAmplitude(amplitude: Float)
+    external override fun setFrequency(frequency: Double, duration: Float)
+    external override fun setAmplitude(amplitude: Float, duration: Float)
     private external fun setSignalType(signalType: Int)
 }

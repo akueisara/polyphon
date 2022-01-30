@@ -7,7 +7,7 @@
 #include "IRenderableAudio.h"
 
 constexpr double kDefaultFrequency = 440.0;
-constexpr int32_t kDefaultSampleRate = 48000;
+constexpr int32_t kDefaultSampleRate = 44100;
 constexpr double kPi = M_PI;
 constexpr double kTwoPi = kPi * 2;
 
@@ -19,8 +19,8 @@ public:
 
     void setWaveOn(bool isWaveOn);
     void setSampleRate(int32_t sampleRate);
-    void setFrequency(double frequency);
-    void setAmplitude(float amplitude);
+    void setFrequency(double frequency, float rampDuration);
+    void setAmplitude(float amplitude, float rampDuration);
 
     enum SignalType {
         Sine = 0,
@@ -38,13 +38,16 @@ private:
     std::atomic<bool> mIsWaveOn{false};
     float mPhase = 0.0;
     float mPhaseIncrement = 0.0f;
-    std::atomic<float> mAmplitude{0.1};
+    float mCurrentAmplitude = 0.1f;
+    float mTargetAmplitude = 0.1f;
     SignalType mSignalType = SignalType::Sine;
-    double mFrequency = kDefaultFrequency;
+    double mCurrentFrequency = kDefaultFrequency;
+    double mTargetFrequency = kDefaultFrequency;
     int32_t mSampleRate = kDefaultSampleRate;
+    int32_t mRampCount = 0;
 
     void updatePhaseIncrement() {
-       mPhase += mFrequency * mPhaseIncrement;
+       mPhase += mCurrentFrequency * mPhaseIncrement;
        // Wrap phase in the range of -1 to +1
        if (mPhase >= 1.0f) {
            mPhase -= 2.0f;

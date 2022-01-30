@@ -41,16 +41,18 @@ JNIEXPORT void JNICALL
 Java_io_github_akueisara_polyphon_Oscillator_setFrequency(
         JNIEnv *env,
         jobject thiz,
-        jdouble frequency) {
-    audioEngine.oscillator.setFrequency(frequency);
+        jdouble frequency,
+        jfloat duration) {
+    audioEngine.oscillator.setFrequency(frequency, duration);
 }
 
 JNIEXPORT void JNICALL
 Java_io_github_akueisara_polyphon_Oscillator_setAmplitude(
         JNIEnv *env,
         jobject thiz,
-        jfloat amplitude) {
-    audioEngine.oscillator.setAmplitude(amplitude);
+        jfloat amplitude,
+        jfloat duration) {
+    audioEngine.oscillator.setAmplitude(amplitude, duration);
 }
 
 JNIEXPORT void JNICALL

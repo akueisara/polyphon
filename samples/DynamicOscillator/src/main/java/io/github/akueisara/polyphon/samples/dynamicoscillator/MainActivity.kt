@@ -39,6 +39,7 @@ private fun DynamicOscillatorApp() {
     var isStart by remember { mutableStateOf(false) }
     var frequency by remember { mutableStateOf(440f) }
     var amplitude by remember { mutableStateOf(0.2f) }
+    var rampDuration by remember { mutableStateOf(1.0f) }
 
     DynamicOscillatorComposeTheme {
         Scaffold(
@@ -114,17 +115,26 @@ private fun DynamicOscillatorApp() {
                     valueRange = 220f..880f,
                     onParameterChange = {
                         frequency = it
-                        AudioEngine.output?.setFrequency(frequency = it.toDouble())
+                        AudioEngine.output?.setFrequency(it.toDouble(), rampDuration)
                     }
                 )
 
                 ParameterSlider(
                     text = "Amplitude",
                     parameter = amplitude,
-                    valueRange = 0.0f..1.0f,
+                    valueRange = 0f..1f,
                     onParameterChange = {
                         amplitude = it
-                        AudioEngine.output?.setAmplitude(amplitude = it)
+                        AudioEngine.output?.setAmplitude(it, rampDuration)
+                    }
+                )
+
+                ParameterSlider(
+                    text = "Ramp Duration",
+                    parameter = rampDuration,
+                    valueRange = 0f..10f,
+                    onParameterChange = {
+                        rampDuration = it
                     }
                 )
 
