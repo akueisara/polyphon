@@ -27,8 +27,8 @@ void Oscillator::renderAudio(float *audioData, int32_t numFrames) {
     if (mIsWaveOn) {
         for (int i = 0; i < numFrames; ++i) {
             if(mRampCount > 0) {
-                mCurrentAmplitude = mCurrentAmplitude * (1.0f - 1.0f / mRampCount) + mTargetAmplitude * (1.0f / mRampCount);
-                mCurrentFrequency = mCurrentFrequency * (1.0f - 1.0f / mRampCount) + mTargetFrequency * (1.0f / mRampCount);
+                mCurrentAmplitude = mCurrentAmplitude + (mTargetAmplitude - mCurrentAmplitude) / mRampCount;
+                mCurrentFrequency = mCurrentFrequency + (mTargetFrequency - mCurrentFrequency) / mRampCount;
                 mRampCount--;
             }
             updatePhaseIncrement();
