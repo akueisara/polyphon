@@ -30,6 +30,9 @@ void Oscillator::renderAudio(float *audioData, int32_t numFrames) {
                 mCurrentAmplitude = mCurrentAmplitude + (mTargetAmplitude - mCurrentAmplitude) / mRampCount;
                 mCurrentFrequency = mCurrentFrequency + (mTargetFrequency - mCurrentFrequency) / mRampCount;
                 mRampCount--;
+            } else {
+                mCurrentAmplitude = mTargetAmplitude;
+                mCurrentFrequency = mTargetFrequency;
             }
             updatePhaseIncrement();
             switch (mSignalType) {
